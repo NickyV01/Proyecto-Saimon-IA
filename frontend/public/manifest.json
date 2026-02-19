@@ -1,0 +1,21 @@
+{
+  "name": "Saimon IA - Asistente",
+  "short_name": "Saimon IA",
+  "description": "Asistente inteligente basado en diseño minimalista",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d263d",
+  "icons": [
+    {
+      "src": "assets/Saimon.jpeg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "assets/Saimon.jpeg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}

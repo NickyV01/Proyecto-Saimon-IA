@@ -1,0 +1,257 @@
+:root {
+    --dark-blue: #0d263d;
+    --accent-blue: #2d89ef;
+    --sidebar-text: #a5b3c2;
+    --hover-bg: rgba(255, 255, 255, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.app-container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilo para el logo solo (Imagen) */
+.saimon-brand-logo {
+    width: 60px;  /* Ajusta este valor para hacerlo más o menos grande */
+    height: 60px; /* Mantén el mismo valor para que sea proporcional */
+    object-fit: contain; /* Evita que el logo se deforme */
+    display: block;
+    background: transparent; /* Asegura que no tenga fondo */
+}
+
+/* Contenedor del encabezado para alinear logo y texto */
+.msg-header {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Espacio entre el logo y el nombre */
+    margin-bottom: 10px;
+}
+
+/* El nombre al lado del logo */
+.name-label {
+    font-weight: bold;
+    font-size: 18px; /* Un poco más grande para acompañar al logo */
+    color: var(--dark-blue);
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+    width: 260px;
+    background-color: var(--dark-blue);
+    color: var(--sidebar-text);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 15px;
+}
+
+.sidebar-label {
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 25px;
+    display: block; /* Asegura que ocupe todo el ancho para poder centrarse */
+}
+
+.avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%; /* Hace que la foto sea circular */
+    border: 3px solid #fff; /* El borde blanco que tienes en la foto */
+    margin: 0 auto 15px;
+    display: block;
+    object-fit: cover; /* Evita que la foto se estire o se vea deforme */
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Interacción extra: que se業務用 un poquito al pasar el mouse */
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.new-chat-btn {
+    background: #fff;
+    color: var(--dark-blue);
+    border: none;
+    padding: 12px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 5px 30px 5px;
+    transition: all 0.2s ease; /* Suaviza la animación */
+}
+
+/* Efecto al pasar el ratón */
+.new-chat-btn:hover {
+    background: #eef0f2;
+    transform: translateY(-2px); /* Se eleva un poquito */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Efecto al hacer clic */
+.new-chat-btn:active {
+    transform: translateY(0); /* Vuelve a su lugar */
+    background: #d1d5db;
+}
+
+.sidebar-nav li {
+    padding: 12px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 10px;
+    margin-bottom: 4px;
+    list-style: none;
+    color: var(--sidebar-text); /* Color grisáceo original */
+    transition: all 0.3s ease; /* Suaviza el cambio de color y movimiento */
+    display: flex;
+    align-items: center;
+}
+
+/* Efecto al pasar el ratón (Hover) */
+.sidebar-nav li:hover {
+    background-color: var(--hover-bg); /* Fondo ligeramente más claro */
+    color: #ffffff; /* El texto se vuelve blanco total */
+    padding-left: 20px; /* Se desplaza 5px a la derecha para dar dinamismo */
+}
+
+/* Efecto al hacer clic (Active) */
+.sidebar-nav li:active {
+    background-color: rgba(255, 255, 255, 0.15);
+    transform: scale(0.98); /* Se encoge un poquito al presionarlo */
+}
+
+
+/* --- ÁREA DE CHAT --- */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+}
+
+.chat-header { padding: 40px 60px 20px; }
+.brand-name { font-size: 22px; font-weight: bold; color: var(--dark-blue); }
+.welcome-text { font-size: 28px; color: #111; margin-top: 20px; }
+
+.chat-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0 60px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- MENSAJES CON IDENTIFICACIÓN --- */
+.msg { 
+    margin-bottom: 35px; 
+    width: 100%;       /* Asegura que el contenedor use el espacio disponible */
+    max-width: 95%;    /* Cambia el 600px anterior por 95% para expandir a la derecha */
+    font-size: 16px; 
+    line-height: 1.5; 
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start; 
+}
+
+/* Nombres arriba del mensaje */
+.msg::before {
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* IA: Línea Azul Brillante */
+.ai-msg { 
+    border-left: 5px solid var(--accent-blue); 
+    padding-left: 20px;
+    color: #333; 
+}
+.ai-msg::before { content: "Saimon IA"; color: var(--accent-blue); }
+
+/* USUARIO: Línea Azul Marino */
+.user-msg {
+    border-left: 5px solid var(--dark-blue); 
+    padding-left: 20px;
+    background: transparent; 
+    color: #333;
+}
+.user-msg::before { content: "Tú"; color: var(--dark-blue); }
+
+/* --- BARRA DE ENTRADA --- */
+.input-area { padding: 30px 60px 50px; background: #fff; }
+.input-pill {
+    display: flex;
+    align-items: center;
+    border: 2px solid #eef0f2;
+    border-radius: 40px;
+    padding: 8px 12px 8px 25px;
+}
+
+.input-pill input { flex: 1; border: none; outline: none; font-size: 16px; padding: 10px; }
+
+.send-btn {
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+/* Efecto al pasar el ratón */
+.send-btn:hover {
+    background: #1c73d4; /* Un azul un poco más oscuro */
+    transform: scale(1.1); /* Crece un 10% */
+}
+
+/* Efecto al hacer clic */
+.send-btn:active {
+    transform: scale(0.95); /* Se encoge un poco al pulsar */
+}
+
+.send-btn svg { width: 20px; height: 20px; fill: white; }
+
+/* --- AJUSTES PARA MÓVIL (Punto 1) --- */
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column; /* Apila los elementos */
+    }
+
+    .sidebar {
+        display: none; /* Oculta el menú lateral en móviles para ganar espacio */
+    }
+
+    .chat-header, .chat-content, .input-area {
+        padding: 20px; /* Reduce los márgenes grandes (60px) en pantallas pequeñas */
+    }
+
+    .welcome-text {
+        font-size: 20px; /* Texto un poco más pequeño para que no desborde */
+    }
+
+    .msg {
+        max-width: 100%; /* Aprovecha todo el ancho del celular */
+    }
+}
