@@ -255,3 +255,39 @@ html, body {
         max-width: 100%; /* Aprovecha todo el ancho del celular */
     }
 }
+
+/* --- Ajuste para que la barra de entrada siempre sea visible --- */
+@media (max-width: 768px) {
+    .app-container {
+        height: 100dvh; /* Usa 'dvh' para ignorar las barras del navegador móvil */
+        flex-direction: column;
+    }
+
+    .chat-main {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .chat-content {
+        flex: 1; /* Esto empuja la barra de entrada siempre al fondo */
+        padding: 15px;
+    }
+
+    .input-area {
+        padding: 10px; /* Menos espacio en móvil para que quepa la barra */
+        background: white;
+        position: sticky;
+        bottom: 0;
+    }
+
+    /* Tu menú lateral (Sidebar) se vuelve un menú superior o se oculta */
+    .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+        flex-direction: row; /* Elementos de lado a lado */
+        justify-content: space-between;
+        display: none; /* Oculto por defecto para que el chat se vea bien */
+    }
+}
