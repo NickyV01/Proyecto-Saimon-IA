@@ -67,3 +67,15 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./sw.js').catch(err => console.log('Error:', err));
   });
 }
+
+const menuToggle = document.getElementById('menuToggle');
+const sidebar = document.querySelector('.sidebar');
+
+menuToggle.addEventListener('click', () => {
+    sidebar.classList.toggle('active'); // Pone o quita la clase 'active'
+});
+
+// Opcional: Cerrar el menú si tocas el chat
+document.querySelector('.chat-main').addEventListener('click', () => {
+    sidebar.classList.remove('active');
+});

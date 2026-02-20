@@ -291,3 +291,36 @@ html, body {
         display: none; /* Oculto por defecto para que el chat se vea bien */
     }
 }
+
+/* Estilo del botón (oculto por defecto) */
+.menu-toggle {
+    display: none;
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    z-index: 1000;
+    background: var(--dark-blue);
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle { display: block; } /* Aparece en móviles */
+
+    .sidebar {
+        position: fixed;
+        left: -260px; /* Escondido a la izquierda */
+        top: 0;
+        height: 100%;
+        z-index: 999;
+        transition: left 0.3s ease; /* Animación de despliegue */
+    }
+
+    /* Clase que activaremos con JS para mostrarlo */
+    .sidebar.active {
+        left: 0;
+    }
+}
