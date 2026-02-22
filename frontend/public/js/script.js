@@ -101,3 +101,49 @@ darkModeToggle.addEventListener('click', () => {
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
     themeIcon.innerHTML = isDark ? sunSVG : moonSVG;
 });
+
+// Efectos del vídeo de presentación de Saimon
+
+const videoContainer = document.getElementById('videoContainer');
+const saimonVideo = document.getElementById('saimonVideo');
+
+// Crear overlay si no existe
+let overlay = document.querySelector('.video-overlay');
+if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'video-overlay';
+    document.body.appendChild(overlay);
+}
+
+videoContainer.addEventListener('click', () => {
+    if (!videoContainer.classList.contains('expanded')) {
+        // Expandir
+        videoContainer.classList.add('expanded');
+        overlay.style.display = 'block';
+        
+        // Audio y Reinicio
+        saimonVideo.muted = false;
+        saimonVideo.currentTime = 0;
+        saimonVideo.play();
+    } else {
+        cerrarVideo();
+    }
+});
+
+overlay.addEventListener('click', cerrarVideo);
+
+function cerrarVideo() {
+    videoContainer.classList.remove('expanded');
+    overlay.style.display = 'none';
+    saimonVideo.muted = true;
+}
+
+// Cerrar video al presionar la tecla Escape
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+        // Verificamos si el video está expandido antes de intentar cerrar
+        if (videoContainer.classList.contains('expanded')) {
+            cerrarVideo();
+        }
+    }
+});

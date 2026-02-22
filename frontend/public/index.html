@@ -23,8 +23,12 @@
 </button>
         <aside class="sidebar">
             <div class="profile-section" style="position: relative;">
-                <img src="assets/Saimon.jpeg" alt="Avatar Saimon" class="avatar">
-                <button id="darkModeToggle" class="theme-toggle-btn">
+                <div id="videoContainer" class="video-wrapper">
+        <video id="saimonVideo" class="avatar-video" autoplay loop muted playsinline preload="auto">
+            <source src="assets/SaimonPresentacion.mp4" type="video/mp4">
+        </video>
+    </div>
+    <button id="darkModeToggle" class="theme-toggle-btn">
         <svg id="themeIcon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
         </svg>
