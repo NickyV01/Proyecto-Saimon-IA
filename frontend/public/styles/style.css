@@ -1,4 +1,5 @@
 :root {
+    /* Modo Claro (Existente) */
     --dark-blue: #0d263d;
     --accent-blue: #2d89ef;
     --sidebar-text: #a5b3c2;
@@ -29,8 +30,12 @@ html, body {
     width: 60px;  /* Ajusta este valor para hacerlo más o menos grande */
     height: 60px; /* Mantén el mismo valor para que sea proporcional */
     object-fit: contain; /* Evita que el logo se deforme */
+    object-fit: cover;      /* Recorta la imagen para que llene el círculo sin estirarse */
     display: block;
-    background: transparent; /* Asegura que no tenga fondo */
+    border-radius: 80%;    /* Hace la magia del círculo */
+    display: block;
+    background: #ffffff;       /* Fondo blanco por si la imagen tiene partes transparentes */
+    border: 2px solid var(--accent-blue); /* Un borde fino para resaltar el círculo */
 }
 
 /* Contenedor del encabezado para alinear logo y texto */
@@ -233,94 +238,223 @@ html, body {
 
 .send-btn svg { width: 20px; height: 20px; fill: white; }
 
-/* --- AJUSTES PARA MÓVIL (Punto 1) --- */
-@media (max-width: 768px) {
-    .app-container {
-        flex-direction: column; /* Apila los elementos */
-    }
-
-    .sidebar {
-        display: none; /* Oculta el menú lateral en móviles para ganar espacio */
-    }
-
-    .chat-header, .chat-content, .input-area {
-        padding: 20px; /* Reduce los márgenes grandes (60px) en pantallas pequeñas */
-    }
-
-    .welcome-text {
-        font-size: 20px; /* Texto un poco más pequeño para que no desborde */
-    }
-
-    .msg {
-        max-width: 100%; /* Aprovecha todo el ancho del celular */
-    }
-}
-
-/* --- Ajuste para que la barra de entrada siempre sea visible --- */
-@media (max-width: 768px) {
-    .app-container {
-        height: 100dvh; /* Usa 'dvh' para ignorar las barras del navegador móvil */
-        flex-direction: column;
-    }
-
-    .chat-main {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-
-    .chat-content {
-        flex: 1; /* Esto empuja la barra de entrada siempre al fondo */
-        padding: 15px;
-    }
-
-    .input-area {
-        padding: 10px; /* Menos espacio en móvil para que quepa la barra */
-        background: white;
-        position: sticky;
-        bottom: 0;
-    }
-
-    /* Tu menú lateral (Sidebar) se vuelve un menú superior o se oculta */
-    .sidebar {
-        width: 100%;
-        height: auto;
-        padding: 10px;
-        flex-direction: row; /* Elementos de lado a lado */
-        justify-content: space-between;
-        display: none; /* Oculto por defecto para que el chat se vea bien */
-    }
-}
-
-/* Estilo del botón (oculto por defecto) */
+/* Esto quita la barra blanca en PC */
 .menu-toggle {
-    display: none;
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1000;
-    background: var(--dark-blue);
-    color: white;
-    border: none;
-    padding: 8px;
-    border-radius: 5px;
-    cursor: pointer;
+    display: none !important; /* Lo oculta */
+    position: absolute;       /* Lo saca del flujo para que no empuje el diseño */
 }
 
-@media (max-width: 768px) {
-    .menu-toggle { display: block; } /* Aparece en móviles */
+.app-container {
+    display: flex;
+    gap: 0 !important;        /* Elimina espacios entre hijos */
+}
 
+.sidebar {
+    width: 260px;
+    margin: 0 !important;     /* Evita márgenes externos */
+}
+
+.chat-main {
+    flex: 1;
+    margin: 0 !important;     /* Evita márgenes externos */
+}
+
+/* --- RESPONSIVE DESIGN (Mobile & Tablets) --- */
+
+@media (max-width: 768px) {
+    /* 1. Ajuste del Contenedor Principal */
+    html, body {
+        overflow: auto; /* Permitimos scroll si el contenido es largo */
+        height: 100dvh; /* Altura dinámica para navegadores móviles */
+    }
+
+    .app-container {
+        flex-direction: column;
+    }
+
+    /* 2. Sidebar como Menú Lateral Desplegable */
     .sidebar {
         position: fixed;
-        left: -260px; /* Escondido a la izquierda */
+        left: -260px; /* Escondido por defecto */
         top: 0;
+        bottom: 0;
+        width: 260px;
         height: 100%;
         z-index: 999;
-        transition: left 0.3s ease; /* Animación de despliegue */
+        transition: left 0.3s ease-in-out;
+        box-shadow: 5px 0 15px rgba(0,0,0,0.3);
+        display: flex; /* Sobrescribe el display:none anterior */
     }
 
-    /* Clase que activaremos con JS para mostrarlo */
+    /* Clase para mostrar la sidebar (se activa con JS) */
     .sidebar.active {
         left: 0;
     }
+
+    /* 3. Botón de Menú (Hamburguesa) */
+    .menu-toggle {
+        display: flex !important; /* Lo vuelve a mostrar solo en móviles */
+        visibility: visible;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 15px;
+        left: 15px;
+        z-index: 1000;
+        background: var(--dark-blue);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    /* 4. Ajustes del área de Chat */
+    .chat-main {
+        width: 100%;
+        height: 100dvh;
+    }
+
+    .chat-header {
+       padding: 15px 20px 10px; /* Menos padding arriba */
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra todo el contenido */
+    }
+
+    .msg-header {
+        justify-content: center;
+    }
+
+    .welcome-text {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    /* 5. Ajustes de Mensajes */
+    .chat-content {
+        padding: 10px 20px;
+    }
+
+    .msg {
+        max-width: 100%;
+        margin-bottom: 25px;
+        font-size: 15px;
+    }
+
+    .ai-msg, .user-msg {
+        padding-left: 15px;
+    }
+
+    /* 6. Barra de entrada fija al fondo */
+    .input-area {
+        padding: 15px;
+        background: #fff;
+        border-top: 1px solid #eee;
+    }
+
+    .input-pill {
+        padding: 5px 10px 5px 15px;
+    }
+
+    .input-pill input {
+        font-size: 14px;
+        padding: 8px;
+    }
+
+    .send-btn {
+        width: 38px;
+        height: 38px;
+    }
 }
+
+/* Ajustes para pantallas muy pequeñas (celulares mini) */
+@media (max-width: 480px) {
+    .welcome-text {
+        font-size: 18px;
+    }
+    
+    .saimon-brand-logo {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Botón de Modo Oscuro - Estilo Moderno */
+.theme-toggle-btn {
+    position: absolute;
+    top: 65px;      /* Se alinea con la parte inferior del avatar */
+    right: 65px;    /* Se pega al lado derecho del avatar */
+    background: var(--accent-blue);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+    transform: scale(1.1);
+    background: #1c73d4;
+}
+
+/* --- MODO OSCURO --- */
+body.dark-mode {
+    background-color: #0b141a;
+}
+
+body.dark-mode .chat-main, 
+body.dark-mode .chat-header, 
+body.dark-mode .chat-content, 
+body.dark-mode .input-area {
+    background-color: #0b141a !important;
+}
+
+body.dark-mode .brand-name, 
+body.dark-mode .welcome-text, 
+body.dark-mode .msg p, 
+body.dark-mode .input-pill input {
+    color: #e9edef !important;
+}
+
+/* Ajustes para el área de entrada en modo oscuro */
+body.dark-mode .input-area {
+    background-color: #0b141a !important; /* El mismo fondo del chat */
+    border-top: 1px solid #233554; /* Una línea muy fina para separar */
+}
+
+body.dark-mode .input-pill {
+    background-color: #112240 !important; /* Un tono apenas más claro que el fondo */
+    border: 1px solid #233554 !important;
+}
+
+body.dark-mode .input-pill input {
+    background: transparent !important; /* Se vuelve invisible */
+    color: #ffffff !important; /* Texto blanco puro al escribir */
+    caret-color: var(--accent-blue); /* El palito del cursor en azul */
+}
+
+/* Color del texto de sugerencia (Placeholder) */
+body.dark-mode .input-pill input::placeholder {
+    color: #8892b0 !important; /* Un gris azulado elegante para el "Escribe un mensaje..." */
+}
+
+/* Color para mensajes de usuario en modo oscuro */
+body.dark-mode .user-msg {
+    border-left-color: var(--sidebar-text);
+}
+body.dark-mode .user-msg::before {
+    color: var(--sidebar-text);
+}
+
+
+
