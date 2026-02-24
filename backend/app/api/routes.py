@@ -5,6 +5,10 @@ from app.schemas.login import LoginRequest, LoginResponse
 from app.schemas.register import RegisterRequest, RegisterResponse
 from app.schemas.changePassword import ChangePasswordtRequest, ChangePasswordResponse
 
+from app.services.login import login, register, changePassword
+
+
+
 router = APIRouter()
 
 @router.get("/health")
