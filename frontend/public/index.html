@@ -1,73 +1,47 @@
 <!DOCTYPE html>
 <html lang="es">
-<!-- <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saimon IA</title>
-    <link rel="stylesheet" href="styles/style.css"> -->
-    <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saimon IA</title>
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#0d263d">
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="manifest" href="manifest.json">
-</head>
+    <title>Iniciar Sesión - Saimon IA</title>
+    <link rel="stylesheet" href="styles/login.css">
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="profile-section">
-                <img src="assets/Saimon.jpeg" alt="Avatar Saimon" class="avatar">
-                <p class="sidebar-label">SAIMON</p>
-            </div>
-            <button class="new-chat-btn">+ Nuevo Chat</button>
-            <nav class="sidebar-nav">
-                <ul>
-                    <li>Presentación</li>
-                    <li>Acerca de...</li>
-                    <li>Configuración</li>
-                </ul>
-            </nav>
-        </aside>
 
-        <main class="chat-main">
-            <header class="chat-header">
-                <div class="brand">
-                    <div class="msg-header">
-             <div class="saimon-logo-container">
-                <img src="assets/LogoUNESR.jpg" class="saimon-brand-logo" alt="Logo">
-             </div>
-                    <span class="brand-name">Saimon IA</span>
-                </div>
-                <h1 class="welcome-text">¡Bienvenido/a! ¿En qué puedo ayudarte hoy?</h1>
-            </header>
 
-            <section class="chat-content" id="chatContent">
-                <div class="msg ai-msg">
-                    <p>Para un diseño minimalista, prioriza el espacio el blanco y usa un color de <strong>acento fuerte</strong>, como al Azul Rey, puro si guiara do el vista del usuario.</p>
-                </div>
-                <div class="msg user-msg">
-                    <p>Cómo puedo implementar un diseño a la cartera en diseño minimalista?</p>
-                </div>
-                <div class="msg ai-msg">
-                    <p>Entiendo. ¿Podrías brindarme algún ejemplo?</p>
-                </div>
-            </section>
+<div class="login-card">
+<img src="assets/LogoUNESR.jpg" class="login-logo" alt="Saimon Logo">
 
-            <footer class="input-area">
-                <div class="input-pill">
-                    <input type="text" id="userInput" placeholder="Escribe un mensaje aquí...">
-                    <button class="send-btn" onclick="sendMessage()" id="sendBtn">
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-        <path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path>
-    </svg>
-</button>
-                </div>
-            </footer>
-        </main>
-    </div>
-    <script src="js/script.js"></script>
+<h2 id="titulo">Saimon IA</h2>
+<p class="subtitle" id="subtitulo">¡Bienvenido!</p>
+
+<div class="input-group">
+    <input type="text" id="nombre" placeholder="Nombre y Apellido" style="display: none;">
+</div>
+
+<div class="input-group">
+    <input type="email" id="email" placeholder="Correo Electrónico">
+</div>
+
+<div class="input-group">
+    <input type="password" id="password" placeholder="Contraseña">
+</div>
+
+<button id="btnPrincipal" class="btn-login" onclick="sendLogin()">Entrar</button>
+
+<div class="login-footer">
+    <a href="#" id="linkOlvido">¿Olvidaste tu contraseña?</a>
+    
+    <p class="mensaje" id="toggleTexto">
+        ¿No tienes cuenta? <a href="javascript:void(0)" id="enlaceToggle">Regístrate aquí</a>
+    </p>
+</div>
+
+<div id="mensaje" class="mensaje-error"></div>
+</div>
+
+
+<script type="module" src="./js/login.js"></script>
+
 </body>
-</html>
+</html> 

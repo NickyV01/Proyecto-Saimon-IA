@@ -1,15 +1,16 @@
-const sendBtn = document.getElementById('sendBtn');
-const userInput = document.getElementById('userInput');
-const chatContent = document.getElementById('chatContent');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
 
 const API_URL = 'http://localhost:8000/api/chat';
 
-async function sendMessage() {
-    const message = userInput.value.trim();
+async function sendLogin() {
+    const password = passwordInput.value.trim();
+    const email = emailInput.value.trim();
+    
     if (!message) return;
 
     // Crear mensaje de usuario
-    const userDiv = document.createElement('div');
+    /*const userDiv = document.createElement('div');
     userDiv.className = 'msg user-msg';
     userDiv.innerHTML = `<p>${message}</p>`;
     chatContent.appendChild(userDiv);
@@ -47,26 +48,15 @@ async function sendMessage() {
     } catch (err) {
         aiDiv.innerHTML = `<p>${err.message}</p>`;
     }
-
+*/
     
 }
 
-// Escuchar click
-sendBtn.addEventListener('click', sendMessage);
+sendBtn.addEventListener('click', sendLogin);
 
 // Escuchar tecla Enter
 userInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
-        sendMessage();
+        sendLogin();
     }
 });
-
-// Registro del Service Worker para que sea instalable
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(err => console.log('Error:', err));
-  });
-}
-
-
-
