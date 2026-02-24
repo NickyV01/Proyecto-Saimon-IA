@@ -1,8 +1,8 @@
 const sendBtn = document.getElementById('sendBtn');
 const userInput = document.getElementById('userInput');
 const chatContent = document.getElementById('chatContent');
+const API_URL = window.APP_CONFIG.API_URL;
 
-const API_URL = 'http://localhost:8000/api/chat';
 
 async function sendMessage() {
     const message = userInput.value.trim();
@@ -21,7 +21,7 @@ async function sendMessage() {
     chatContent.scrollTop = chatContent.scrollHeight;
 
      try {
-        const res = await fetch(API_URL, {
+        const res = await fetch(`${API_URL}/api/chat`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message }),

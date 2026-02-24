@@ -12,7 +12,7 @@ subprocess.Popen(
 
 # Backend
 subprocess.Popen(
-    ["uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
+    [sys.executable, "-m", "uvicorn", "app.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"],
     cwd=os.path.join(ROOT, "backend"),
 )
 

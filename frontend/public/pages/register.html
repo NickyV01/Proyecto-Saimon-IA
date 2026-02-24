@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Iniciar Sesión - Saimon IA</title>
-    <link rel="stylesheet" href="styles/login.css" />
+    <title>Registrar - Saimon IA</title>
+    <link rel="stylesheet" href="../styles/login.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -12,45 +12,40 @@
   </head>
   <body>
     <div class="login-card">
-      <img src="assets/LogoUNESR.jpg" class="login-logo" alt="Saimon Logo" />
+      <img src="../assets/LogoUNESR.jpg" class="login-logo" alt="Saimon Logo" />
 
       <h2 id="titulo">Saimon IA</h2>
       <p class="subtitle" id="subtitulo">¡Bienvenido!</p>
 
-       <div class="form">
+      <div class="form">
+        <div>
+          <input type="text" id="fullName" placeholder="Nombre y Apellido" />
+        </div>
 
         <div>
-          <!-- <div class="inputs">
-            <span class="spans">Correo</span>
-          </div> -->
           <input type="text" id="email" placeholder="Correo Electrónico" />
         </div>
 
         <div>
-          <!-- <div class="inputs">
-            <span class="spans">Contraseña</span>
-          </div> -->
           <input type="text" id="password" placeholder="Contraseña" />
         </div>
       </div>
 
-      <button id="btnPrincipal" class="btn-login" onclick="sendLogin()">
-        Entrar
+      <button id="btnPrincipal" class="btn-login" onclick="register()">
+        Registrar
       </button>
 
       <div class="login-footer">
-        <a href="pages/changePassword.html" id="linkOlvido">¿Olvidaste tu contraseña?</a>
-
         <p class="mensaje" id="toggleTexto">
-          ¿No tienes cuenta?
-          <a href="pages/register.html" id="enlaceToggle">Regístrate aquí</a>
+          ¿Ya posees cuenta?
+          <a href="../index.html" id="enlaceToggle">Ingresa aquí</a>
         </p>
       </div>
 
       <div id="mensaje" class="mensaje-error"></div>
     </div>
 
-    <script src="js/config.js"></script>
-    <script src="js/login.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/register.js"></script>
   </body>
 </html>

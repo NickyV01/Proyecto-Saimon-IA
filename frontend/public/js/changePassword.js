@@ -1,27 +1,14 @@
-const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
-const mensajeDiv = document.getElementById("mensaje");
+const confirmPasswordInput = document.getElementById("confirmPassword");
 const API_URL = window.APP_CONFIG.API_URL;
 
-async function sendLogin() {
+async function sendChangePassword() {
   const password = passwordInput.value.trim();
-  const email = emailInput.value.trim();
-
-  console.log("email", email);
-  console.log("password", password);
+  const confirmPassword = confirmPasswordInput.value.trim();
 
   mensajeDiv.textContent = "";
   mensajeDiv.style.display = "none";
 
-  if (!email) {
-    mostrarError("Por favor ingresa un correo electrónico.");
-    return;
-  }
-
-  if (!validarEmail(email)) {
-    mostrarError("El correo electrónico no es válido.");
-    return;
-  }
 
   if (!/^(?=.*[A-Z]).{5,}$/.test(password)) {
     mostrarError(
@@ -35,11 +22,16 @@ async function sendLogin() {
     return;
   }
 
+  if (password !== confirmPassword) {
+    mostrarError("Las contraseña no coinciden.");
+    return;
+  }
+
   try {
-    const res = await fetch(`${API_URL}/api/login`, {
+    const res = await fetch(`${API_URL}/api/change-password`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ password, confirmPassword }),
     });
 
     if (!res.ok) {
@@ -58,11 +50,6 @@ async function sendLogin() {
 function mostrarError(mensaje) {
   mensajeDiv.textContent = mensaje;
   mensajeDiv.style.display = "block";
-}
-
-function validarEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
 }
 
 sendBtn.addEventListener("click", sendLogin);

@@ -1,3 +1,4 @@
+const fullNameInput = document.getElementById("fullName");
 const emailInput = document.getElementById("email");
 const passwordInput = document.getElementById("password");
 const mensajeDiv = document.getElementById("mensaje");
@@ -6,12 +7,18 @@ const API_URL = window.APP_CONFIG.API_URL;
 async function sendLogin() {
   const password = passwordInput.value.trim();
   const email = emailInput.value.trim();
+  const fullName = fullNameInput.value.trim();
 
   console.log("email", email);
   console.log("password", password);
 
   mensajeDiv.textContent = "";
   mensajeDiv.style.display = "none";
+
+  if (!fullName) {
+    mostrarError("Por favor ingresa un nombre y apellido.");
+    return;
+  }
 
   if (!email) {
     mostrarError("Por favor ingresa un correo electrónico.");
@@ -36,10 +43,10 @@ async function sendLogin() {
   }
 
   try {
-    const res = await fetch(`${API_URL}/api/login`, {
+    const res = await fetch(`${API_URL}/api/register`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
+      body: JSON.stringify({ fullName, password, email }),
     });
 
     if (!res.ok) {
