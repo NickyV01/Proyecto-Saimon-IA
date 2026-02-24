@@ -25,26 +25,26 @@ def chat(payload: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/login", response_model=LoginResponse)
-def login(payload: LoginRequest):
+def loginUser(payload: LoginRequest):
     try:
-        answer = login(payload)
-        return LoginResponse(answer=answer)
+        data = login(payload)
+        return LoginResponse(data=data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
 @router.post("/register", response_model=RegisterResponse)
-def register(payload: RegisterRequest):
+def registerUser(payload: RegisterRequest):
     try:
-        answer = register(payload)
-        return RegisterResponse(answer=answer)
+        data = register(payload)
+        return RegisterResponse(data=data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
     
     
 @router.post("/change-password", response_model=ChangePasswordResponse)
-def changePassword(payload: ChangePasswordtRequest):
+def changePasswordUser(payload: ChangePasswordtRequest):
     try:
-        answer = changePassword(payload.message)
-        return ChangePasswordResponse(answer=answer)
+        data = changePassword(payload.message)
+        return ChangePasswordResponse(data=data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
