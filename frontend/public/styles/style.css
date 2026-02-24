@@ -515,4 +515,24 @@ body.dark-mode .user-msg::before {
     z-index: 100;
 }
 
+/* --- AJUSTE PARA LOGOUT EN LA PARTE SUPERIOR DEL SIDEBAR --- */
 
+/* Botón de Logout (Hamburguesa)dentro del Sidebar */
+.logout-btn-sidebar {
+        display: flex;
+        content: justify;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 15px;
+        right: 165px;
+        z-index: 1000;
+        background: var(--dark-blue);
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}

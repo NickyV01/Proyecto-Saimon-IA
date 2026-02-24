@@ -21,8 +21,18 @@
         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"></path>
     </svg>
 </button>
+
         <aside class="sidebar">
             <div class="profile-section" style="position: relative;">
+
+ <button class="logout-btn-sidebar btn-cerrar-sesion-saimon-unico" id="logoutBtn">
+            <svg viewBox="0 0 24 24" width="23" height="23" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                <polyline points="16 17 21 12 16 7"></polyline>
+                <line x1="21" y1="12" x2="9" y2="12"></line>
+            </svg>
+        </button>
+
                 <div id="videoContainer" class="video-wrapper">
         <video id="saimonVideo" class="avatar-video" autoplay loop muted playsinline preload="auto">
             <source src="assets/SaimonPresentacion.mp4" type="video/mp4">
@@ -44,6 +54,11 @@
                 </ul>
             </nav>
         </aside>
+
+        <div class="sidebar-footer">
+
+    </div>
+</aside>
 
         <main class="chat-main">
             <header class="chat-header">
@@ -72,7 +87,7 @@
             <footer class="input-area">
                 <div class="input-pill">
                     <input type="text" id="userInput" placeholder="Escribe un mensaje aquí...">
-                    <button class="send-btn" onclick="sendMessage()" id="sendBtn">
+                    <button class="send-btn" id="sendBtn">
     <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
         <path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z"></path>
     </svg>
@@ -81,7 +96,7 @@
             </footer>
         </main>
     </div>
-    <script src="js/script.js"></script>
+    <script type="module" src="js/script.js"></script>
 
 </body>
 </html>

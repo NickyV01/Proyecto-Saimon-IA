@@ -1,55 +1,103 @@
-const sendBtn = document.getElementById('sendBtn');
-const userInput = document.getElementById('userInput');
-const chatContent = document.getElementById('chatContent');
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
+const firebaseConfig = {
+    apiKey: "AIzaSyB7nJRPxknQrgsEKVY2hSZS0mone-FRYvo",
+    authDomain: "saimonia.firebaseapp.com",
+    projectId: "saimonia",
+    storageBucket: "saimonia.firebasestorage.app",
+    messagingSenderId: "381539754872",
+    appId: "1:381539754872:web:51c78a86e79f033585de8d"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Referencias globales para que funcionen en todo el script
+const chatContent = document.getElementById('chatContent');
+const userInput = document.getElementById('userInput');
 const API_URL = 'http://localhost:8000/api/chat';
 
+// --- EL PORTERO ---
+onAuthStateChanged(auth, (user) => {
+    if (!user) {
+        window.location.href = "login.html";
+    } else {
+        console.log("Acceso autorizado para:", user.email);
+        
+        // ACTIVAR EVENTOS (Esto arregla el bloqueo de los clics)
+        const sendBtn = document.getElementById('sendBtn');
+        if (sendBtn) {
+            sendBtn.addEventListener('click', sendMessage);
+        }
+        if (userInput) {
+            userInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        }
+    }
+});
+
+// --- FUNCIÓN DE ENVÍO ---
 async function sendMessage() {
     const message = userInput.value.trim();
     if (!message) return;
 
-    // Crear mensaje de usuario
+    // 1. Mostrar mensaje del usuario
     const userDiv = document.createElement('div');
     userDiv.className = 'msg user-msg';
     userDiv.innerHTML = `<p>${message}</p>`;
     chatContent.appendChild(userDiv);
 
-    // Limpiar input
     userInput.value = "";
-
-    // Auto-scroll al fondo
     chatContent.scrollTop = chatContent.scrollHeight;
 
-     try {
+    try {
         const res = await fetch(API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message }),
         });
 
-        if (!res.ok) {
-            const errText = await res.text();
-            throw new Error(`HTTP ${res.status}: ${errText}`);
-        }
+        if (!res.ok) throw new Error(`Error HTTP: ${res.status}`);
 
-        const data = await res.json(); // { answer: "..." }
-        console.log('data', data);
+        const data = await res.json();
 
-        // Simular respuesta de Saimon IA
-    setTimeout(() => {
-        const aiDiv = document.createElement('div');
-        aiDiv.className = 'msg ai-msg';
-        aiDiv.innerHTML = `<p>${data.answer}</p>`;
-        chatContent.appendChild(aiDiv);
-        chatContent.scrollTop = chatContent.scrollHeight;
-    }, 1000);
+        // 2. Respuesta de Saimon IA
+        setTimeout(() => {
+            const aiDiv = document.createElement('div');
+            aiDiv.className = 'msg ai-msg';
+            aiDiv.innerHTML = `<p>${data.answer}</p>`;
+            chatContent.appendChild(aiDiv);
+            chatContent.scrollTop = chatContent.scrollHeight;
+        }, 500);
 
     } catch (err) {
-        aiDiv.innerHTML = `<p>${err.message}</p>`;
+        console.error(err);
+        const errorDiv = document.createElement('div');
+        errorDiv.className = 'msg ai-msg';
+        errorDiv.innerHTML = `<p style="color:red">Error: No se pudo conectar con el cerebro de Saimon.</p>`;
+        chatContent.appendChild(errorDiv);
     }
-
-    
 }
+
+// LÓGICA PARA CERRAR SESIÓN
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', () => {
+                if (confirm("¿Estás seguro de que deseas cerrar sesión?")) {
+                    signOut(auth).then(() => {
+                        window.location.href = "login.html";
+                    }).catch((error) => {
+                        console.error("Error al cerrar sesión:", error);
+                    });
+                }
+                });
+        }
+
+
+// --- RESTO DE TU LÓGICA (Dark Mode, Sidebar, Video) ---
+// (Copia aquí abajo todo el código que ya tenías de Dark Mode, Sidebar y Video)
 
 // Escuchar click
 sendBtn.addEventListener('click', sendMessage);
