@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="login-card">
@@ -26,8 +30,12 @@
           <input type="text" id="email" placeholder="Correo Electrónico" />
         </div>
 
-        <div>
+        <div class="input-wrapper">
           <input type="password" id="password" placeholder="Contraseña" />
+          <i
+            class="fa fa-eye toggle-password"
+            onclick="togglePassword('password', this)"
+          ></i>
         </div>
       </div>
 

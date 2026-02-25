@@ -9,6 +9,10 @@
       href="https://fonts.googleapis.com/css2?family=Funnel+Sans:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
   </head>
   <body>
     <div class="login-card">
@@ -17,20 +21,17 @@
       <h2 id="titulo">Saimon IA</h2>
       <p class="subtitle" id="subtitulo">¡Bienvenido!</p>
 
-       <div class="form">
-
+      <div class="form">
         <div>
-          <!-- <div class="inputs">
-            <span class="spans">Correo</span>
-          </div> -->
           <input type="text" id="email" placeholder="Correo Electrónico" />
         </div>
 
-        <div>
-          <!-- <div class="inputs">
-            <span class="spans">Contraseña</span>
-          </div> -->
+        <div class="input-wrapper">
           <input type="password" id="password" placeholder="Contraseña" />
+          <i
+            class="fa fa-eye toggle-password"
+            onclick="togglePassword('password', this)"
+          ></i>
         </div>
       </div>
 
@@ -39,7 +40,9 @@
       </button>
 
       <div class="login-footer">
-        <a href="pages/changePassword.html" id="linkOlvido">¿Olvidaste tu contraseña?</a>
+        <a href="pages/changePassword.html" id="linkOlvido"
+          >¿Olvidaste tu contraseña?</a
+        >
 
         <p class="mensaje" id="toggleTexto">
           ¿No tienes cuenta?

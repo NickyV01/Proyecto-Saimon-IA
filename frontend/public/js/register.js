@@ -80,3 +80,18 @@ userInput.addEventListener("keypress", (e) => {
     sendLogin();
   }
 });
+
+
+function togglePassword(inputId, element) {
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+        input.type = "text";
+        element.classList.remove("fa-eye");
+        element.classList.add("fa-eye-slash");
+    } else {
+        input.type = "password";
+        element.classList.remove("fa-eye-slash");
+        element.classList.add("fa-eye");
+    }
+}
