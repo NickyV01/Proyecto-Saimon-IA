@@ -1,4 +1,6 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
+from app.db.database import get_db
 from app.schemas.chat import ChatRequest, ChatResponse
 from app.services.chat_service import generate_reply
 from app.schemas.login import LoginRequest, LoginResponse
@@ -7,6 +9,7 @@ from app.schemas.changePassword import ChangePasswordtRequest, ChangePasswordRes
 
 from app.services.login import login, register, changePassword
 
+router = APIRouter()
 
 
 router = APIRouter()
@@ -25,9 +28,12 @@ def chat(payload: ChatRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/login", response_model=LoginResponse)
-def loginUser(payload: LoginRequest):
+async def loginUser(
+    payload: LoginRequest,
+    db: AsyncSession = Depends(get_db)
+):
     try:
-        data = login(payload)
+        data = await login(payload, db)
         return LoginResponse(data=data)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
